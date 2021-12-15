@@ -147,6 +147,7 @@ class Option(_Option[T]):
 class Ok(Result[T, E]):
     """Standard wrapper for results."""
 
+    __match_args__ = ("_value",)
     __slots__ = ("_value",)
 
     def __init__(self, result: T) -> None:
@@ -273,7 +274,7 @@ class Ok(Result[T, E]):
 
     def __eq__(self, other: t.Any) -> bool:
         """Compare two results. They are equal if their values are equal."""
-        if not isinstance(other, Result):
+        if not isinstance(other, Ok):
             return False
         if not other.is_ok():
             return False
@@ -296,6 +297,7 @@ class Ok(Result[T, E]):
 class Err(Result[T, E]):
     """Standard wrapper for results."""
 
+    __match_args__ = ("_value",)
     __slots__ = ("_value",)
 
     def __init__(self, result: E) -> None:
@@ -446,6 +448,7 @@ class Err(Result[T, E]):
 class Some(Option[T]):
     """A value that may be `Some` or `Nothing`."""
 
+    __match_args__ = ("_value",)
     __slots__ = ("_value",)
 
     def __init__(self, value: T) -> None:
@@ -613,6 +616,7 @@ class Some(Option[T]):
 class Nothing(Option[T]):
     """A value that may be `Some` or `Nothing`."""
 
+    __match_args__ = ("_value",)
     __slots__ = ("_value",)
 
     _instance = None
